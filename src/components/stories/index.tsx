@@ -89,10 +89,10 @@ const SuccessStories = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
             <div className="text-center mb-8 sm:mb-12">
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-800 mb-2">
-                    Mijozlarimiz Hikoyalari
+                    {t('mijoz_haqida')}
                 </h1>
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-red-500">
-                    Huquqshinomiz haqida bilib oling
+                    {t('mijoz_haqida2')}
                 </h2>
             </div>
 
