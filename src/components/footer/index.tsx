@@ -21,7 +21,7 @@ const Footer: React.FC = () => {
               <form className="md:w-1/2 space-y-4 bg-white p-6 rounded shadow">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                          <label className="block text-sm font-medium">{t('name')}</label>
+                          <label className="block text-sm font-medium mb-1">{t('name')}</label>
                           <input
                               type="text"
                               name="name"
@@ -31,7 +31,7 @@ const Footer: React.FC = () => {
                           />
                       </div>
                       <div>
-                          <label className="block text-sm font-medium">{t('phone')}</label>
+                          <label className="block text-sm font-medium mb-1">{t('phone')}</label>
                           <input
                               type="tel"
                               name="phone"
@@ -43,7 +43,7 @@ const Footer: React.FC = () => {
                   </div>
 
                   <div>
-                      <label className="block text-sm font-medium">{t('email')}</label>
+                      <label className="block text-sm font-medium mb-1">{t('email')}</label>
                       <input
                           type="email"
                           name="email"
@@ -54,7 +54,7 @@ const Footer: React.FC = () => {
                   </div>
 
                   <div>
-                      <label className="block text-sm font-medium">{t('message')}</label>
+                      <label className="block text-sm font-medium mb-1">{t('message')}</label>
                       <textarea
                           name="message"
                           placeholder={t('messageKey')}
@@ -64,20 +64,11 @@ const Footer: React.FC = () => {
                       />
                   </div>
 
-                  {/*<div className="flex items-start gap-2">*/}
-                  {/*    <input*/}
-                  {/*        type="checkbox"*/}
-                  {/*        name="agree"*/}
-                  {/*        className="mt-1 cursor-pointer"*/}
-                  {/*    />*/}
-                  {/*    <label className="text-sm">*/}
-                  {/*        {t('privacyConsent')}*/}
-                  {/*    </label>*/}
-                  {/*</div>*/}
+
 
                   <button
                       type="submit"
-                      className="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700"
+                      className="bg-red-600 text-white px-6 py-2  rounded hover:bg-red-700"
                   >
                       {t('submit')}
                   </button>

@@ -64,7 +64,7 @@ const SuccessStories = () => {
             company: t('companyRegistration'),
             rating: 5,
             testimonial:t('clientStory1'),
-            avatar: "/placeholder.svg",
+            avatar: "/avatar.png",
         },
         {
             id: "2",
@@ -72,7 +72,7 @@ const SuccessStories = () => {
             company: t('companyRegistration'),
             rating: 5,
             testimonial:t('clientStory2'),
-            avatar: "/placeholder.svg",
+            avatar: "/avatar.png",
         },
         {
             id: "3",
@@ -80,7 +80,7 @@ const SuccessStories = () => {
             company: t('companyRegistration'),
             rating: 5,
             testimonial:t('clientStory3'),
-            avatar: "/placeholder.svg",
+            avatar: "/avatar.png",
         },
     ];
 

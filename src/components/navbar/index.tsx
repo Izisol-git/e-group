@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState,useEffect } from "react";
 import ContactModal from "../contactModal";
 import LanguageSwitcher from "../languageSwitcher";
 import {useNavigate} from "react-router-dom";
@@ -12,7 +12,7 @@ interface NavItem {
 
 
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC = ( ) => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const navigate = useNavigate();
@@ -30,6 +30,19 @@ const Navbar: React.FC = () => {
             onClick: () => setModalOpen(true)
         },
     ];
+
+    useEffect(() => {
+        if (mobileMenuOpen) {
+            document.body.style.overflow = 'hidden'; // scroll block
+        } else {
+            document.body.style.overflow = 'auto'; // scroll restore
+        }
+
+        // Clean-up function: sahifa unmount bo‘lsa scrollni tiklash
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [mobileMenuOpen]);
 
     return (
         <header className="fixed top-0 left-0 w-full bg-white shadow-md border-b z-50">
@@ -107,7 +120,7 @@ const Navbar: React.FC = () => {
                 </div>
 
                 {mobileMenuOpen && (
-                    <div className=" block lg:hidden border-t border-gray-200 py-3 m">
+                    <div className=" block lg:hidden border-t    border-gray-200   p-3 h-max pb-6">
                         {navItems.map((item) =>
                             <button
                                 key={item.label}
@@ -124,10 +137,10 @@ const Navbar: React.FC = () => {
                                         window.history.replaceState({}, document.title);
                                     }
                                 }}
-                                className="text-gray-700 hover:!text-red-600 font-medium transition block mt-3 "
+                                className="text-gray-700  border-b w-full text-start mt-3   pb-3 hover:!text-red-600 font-medium transition block  "
                                 type="button"
                             >
-                                <a href={`#${item.id}`}>{t(item.label)}</a>
+                                <a className={'ml-3'} href={`#${item.id}`}>{t(item.label)}</a>
                             </button>
                         )}
                     </div>

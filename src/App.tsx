@@ -28,11 +28,11 @@ const App: React.FC = () => {
 
 
     return (
-        <>
+        <div id='box'>
 
             <header>
                 <nav>
-                    <Navbar/>
+                    <Navbar key={'box'} />
                 </nav>
             </header>
 
@@ -47,7 +47,7 @@ const App: React.FC = () => {
                 <Route path="/asset-recovery-block" element={<AssetRecovery/>}/>
                 <Route path="/legal-service-block" element={<LegalService/>}/>
             </Routes>
-        </>
+        </div>
 
     );
 };
