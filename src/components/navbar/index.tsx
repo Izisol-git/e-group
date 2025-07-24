@@ -53,7 +53,7 @@ const Navbar: React.FC = () => {
                                 <button
                                     key={item.label}
                                     onClick={()=> {
-                                        navigate('/', { state: { scrollToId: item.id } });
+                                        navigate('/');
                                         const el = document.getElementById(`${item.id}`);
                                         if (el) {
                                             el.scrollIntoView({ behavior: 'smooth' });
@@ -62,7 +62,8 @@ const Navbar: React.FC = () => {
                                     className="text-gray-700 hover:text-red-600 font-medium transition"
                                     type="button"
                                 >
-                                    {t(item.label)}
+                                    <a href={`#${item.id}`}>{t(item.label)}</a>
+
                                 </button>
                             )
                         )}
@@ -111,7 +112,6 @@ const Navbar: React.FC = () => {
                                 <button
                                     key={item.label}
                                     onClick={() => {
-
                                         navigate('/', {state: {scrollToId: item.id}});
                                         setMobileMenuOpen(!mobileMenuOpen)
                                         const el = document.getElementById(`${item.id}`);

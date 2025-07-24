@@ -20,7 +20,6 @@ const App: React.FC = () => {
             duration: 1000,
             once: true,
         });
-        window.scrollTo(0, 0);
     }, []);
 
 
