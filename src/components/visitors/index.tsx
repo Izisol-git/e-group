@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, FileText, Building, Heart, Users } from "lucide-react";
+import {useTranslation} from "react-i18next";
 
 interface Service {
   id: string;
@@ -9,43 +10,61 @@ interface Service {
   icon: React.ReactNode;
   bgColor: string;
   iconColor: string;
+  onClick : ()=> void;
 }
 
 const Visitors: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-
+  const {t} = useTranslation();
   const services: Service[] = [
     {
       id: "immigration",
-      title: "Migratsiya masalalari",
-      description: "Chet elga chiqish, yashash ruxsati va boshqa huquqiy muammolar bo‘yicha maslahat.",
+      title: t('migrationIssues'),
+      description: t('migrationDesc'),
       icon: <FileText className="w-8 h-8" />,
       bgColor: "bg-blue-50",
       iconColor: "text-blue-600",
+      onClick : ()=>{
+          const el = document.getElementById('services-block-footer');
+          el?.scrollIntoView({ behavior: 'smooth' });
+      }
+
     },
     {
       id: "property",
-      title: "Mulk huquqi",
-      description: "Ko‘chmas mulk, ijaralar va boshqa mulkiy nizolar bo‘yicha yuridik yordam.",
+      title: t('propertyLaw'),
+      description: t('propertyDesc'),
       icon: <Building className="w-8 h-8" />,
       bgColor: "bg-orange-50",
       iconColor: "text-orange-600",
+      onClick : ()=>{
+        const el = document.getElementById('services-block-footer');
+        el?.scrollIntoView({ behavior: 'smooth' });
+      }
     },
     {
       id: "matrimonial",
-      title: "Oilaviy masalalar",
-      description: "Ajrashish, aliment, vasiylik va boshqa oilaviy huquqiy masalalar.",
+      title: t('familyIssues'),
+      description: t('familyDesc'),
       icon: <Heart className="w-8 h-8" />,
       bgColor: "bg-pink-50",
       iconColor: "text-pink-600",
+      onClick : ()=>{
+        const el = document.getElementById('services-block-footer');
+        el?.scrollIntoView({ behavior: 'smooth' });
+      }
     },
     {
       id: "personal",
-      title: "Shaxsiy maslahatlar",
-      description: "Shaxsiy nizolar, murojaatlar va boshqa umumiy huquqiy savollar bo‘yicha maslahat.",
+      title: t('personalAdvice'),
+      description: t('personalDesc'),
       icon: <Users className="w-8 h-8" />,
       bgColor: "bg-purple-50",
       iconColor: "text-purple-600",
+      onClick : ()=>{
+        const el = document.getElementById('services-block-footer');
+        el?.scrollIntoView({ behavior: 'smooth' });
+      }
     },
   ];
 
@@ -65,18 +84,18 @@ const Visitors: React.FC = () => {
           <div className="space-y-6 text-center lg:text-left">
             <div className="space-y-3 sm:space-y-4">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-                Kelajagingizni ishonch bilan{" "}
-                <span className="text-red-600">yuridik himoyaga topshiring</span>
+                {t('secureFuture')}{" "}
+                <span className="text-red-600">{t('secureFutureDesc')}</span>
               </h2>
               <p className="text-gray-600 text-sm sm:text-base md:text-lg leading-relaxed max-w-md mx-auto lg:mx-0">
-                Biz sizga tajribali yuristlar orqali mulk, oila, migratsiya va boshqa huquqiy masalalarda yechim taklif qilamiz.
+                {t('legalSolutions')}
               </p>
             </div>
 
             <div className="flex md:hidden items-center justify-center lg:justify-start space-x-4">
               <button
-                onClick={prevSlide}
-                className="p-2 sm:p-3 rounded-full border border-gray-200 hover:border-gray-300 hover:bg-gray-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500"
+                  onClick={prevSlide}
+                  className="p-2 sm:p-3 rounded-full border border-gray-200 hover:border-gray-300 hover:bg-gray-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500"
                 aria-label="Previous services"
               >
                 <ChevronLeft className="w-5 h-5 text-gray-600" />
@@ -93,8 +112,8 @@ const Visitors: React.FC = () => {
 
           {/* Right section: Services Grid (Desktop) */}
           <div className="hidden lg:grid grid-cols-2 gap-6">
-            {services.map((service) => (
-              <div
+            {services.map((service , index) => (
+              <div onClick={service.onClick} data-aos={index%2 === 0 ?  "fade-down-right" : "fade-up-left"}
                 key={service.id}
                 className={`${service.bgColor} rounded-2xl p-6 hover:shadow-xl transition-all duration-300 cursor-pointer border border-gray-100 hover:border-gray-200`}
               >
@@ -120,7 +139,7 @@ const Visitors: React.FC = () => {
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
             >
               {services.map((service) => (
-                <div key={service.id} className="w-full flex-shrink-0 px-2 sm:px-4">
+                <div onClick={service.onClick} key={service.id} className="w-full flex-shrink-0 px-2 sm:px-4">
                   <div
                     className={`${service.bgColor} rounded-2xl p-5 sm:p-6 hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-gray-200`}
                   >

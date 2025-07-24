@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Phone, Zap, Star } from "lucide-react";
+import SwitchContactModal from "../contactModal/switchContactModal.tsx";
+import {useTranslation} from "react-i18next";
 
 interface PricingOption {
   id: string;
@@ -11,48 +13,59 @@ interface PricingOption {
   validity: string;
 }
 
-const pricingOptions: PricingOption[] = [
-  {
-    id: "60min",
-    minutes: 60,
-    price: 20,
-    pricePerMinute: "$16.6/ daqiqa",
-    validity: "Daqiqa 30 kun davomida amal qiladi",
-  },
-  {
-    id: "45min",
-    minutes: 45,
-    price: 20,
-    pricePerMinute: "$18.80/ daqiqa",
-    validity: "Daqiqa 30 kun davomida amal qiladi",
-  },
-  {
-    id: "30min",
-    minutes: 30,
-    price: 20,
-    pricePerMinute: "$23.30/ daqiqa",
-    validity: "Daqiqa 30 kun davomida amal qiladi",
-  },
-  {
-    id: "15min",
-    minutes: 15,
-    price: 20,
-    pricePerMinute: "$33.20/ daqiqa",
-    validity: "Daqiqa 30 kun davomida amal qiladi",
-  },
-];
+
 
 const Consultation = () => {
+  const {t } = useTranslation();
+  const pricingOptions: PricingOption[] = [
+    {
+      id: "60min",
+      minutes: 60,
+      price: 20,
+      pricePerMinute: `$16.6/ ${t('minuteDuration')}`,
+      validity: t('validityPeriod'),
+    },
+    {
+      id: "45min",
+      minutes: 45,
+      price: 20,
+      pricePerMinute: `$18.80/  ${t('minuteDuration')}`,
+      validity: t('validityPeriod'),
+    },
+    {
+      id: "30min",
+      minutes: 30,
+      price: 20,
+      pricePerMinute: `$23.30/ ${t('minuteDuration')}`,
+      validity: t('validityPeriod'),
+    },
+    {
+      id: "15min",
+      minutes: 15,
+      price: 20,
+      pricePerMinute: `$33.20/ ${t('minuteDuration')}`,
+      validity: t('validityPeriod'),
+    },
+  ];
   const [selectedOption, setSelectedOption] = useState("60min");
+  const [openModal, setOpenModal] = useState(false);
+
+
+
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+
+
+      <SwitchContactModal isOpen={openModal} onClose={() => setOpenModal(false)} timeValue={selectedOption} />
+
+
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
         {/* Header */}
         <div className="text-center py-8 sm:py-10 px-4 sm:px-6">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-800">
-            Mutaxassis yechimlarini olish uchun{" "}
-            <span className="text-red-500 font-bold">paketni tanlang</span>
+            {t('expertSolutions')}{" "}
+            <span className="text-red-500 font-bold">{t('choosePackage')}</span>
           </h1>
         </div>
 
@@ -62,7 +75,7 @@ const Consultation = () => {
             <div className="space-y-6 sm:space-y-8">
               <div>
                 <h2 className="text-lg sm:text-xl font-medium text-gray-700 leading-relaxed max-w-xs">
-                  Bugungi to‘g‘ri huquqiy maslahat — kelajakdagi katta xarajatlardan saqlaydi.
+                  {t('timelyAdvice')}
                 </h2>
               </div>
 
@@ -72,7 +85,7 @@ const Consultation = () => {
                     <Phone className="w-4 h-4 text-orange-500" />
                   </div>
                   <span className="text-gray-600 text-sm sm:text-base font-medium">
-                    73 mingdan ortiq qo‘ng‘iroq ulandi
+                    {t('callsMade')}
                   </span>
                 </div>
 
@@ -81,7 +94,7 @@ const Consultation = () => {
                     <Zap className="w-4 h-4 text-green-500" />
                   </div>
                   <span className="text-gray-600 text-sm sm:text-base font-medium">
-                    63 mingdan ortiq ijobiy natija
+                    {t('positiveOutcomes')}
                   </span>
                 </div>
 
@@ -90,7 +103,7 @@ const Consultation = () => {
                     <Star className="w-4 h-4 text-pink-500 fill-current" />
                   </div>
                   <span className="text-gray-600 text-sm sm:text-base font-medium">
-                    O‘rtacha reyting: 4.6/5
+                    {t('averageRating')}
                   </span>
                 </div>
               </div>
@@ -98,8 +111,8 @@ const Consultation = () => {
           </div>
 
           {/* Right Section: Pricing Options */}
-          <div className="lg:w-2/3 p-6 sm:p-8">
-            <div className="space-y-3 sm:space-y-4">
+          <div className="lg:w-2/3 p-6 sm:p-8 " >
+            <div className="space-y-3 sm:space-y-4"  >
               {pricingOptions.map((option) => (
                 <div
                   key={option.id}
@@ -110,7 +123,7 @@ const Consultation = () => {
                   }`}
                   onClick={() => setSelectedOption(option.id)}
                 >
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between" data-aos="flip-up">
                     <div className="flex items-center space-x-3 sm:space-x-4">
                       <div className="relative">
                         <input
@@ -127,7 +140,7 @@ const Consultation = () => {
                             selectedOption === option.id ? "text-purple-700" : "text-gray-800"
                           }`}
                         >
-                          {option.minutes} daqiqa
+                          {option.minutes} {t('minuteDuration')}
                         </h3>
                         <p
                           className={`text-xs sm:text-sm ${
@@ -160,8 +173,8 @@ const Consultation = () => {
             </div>
 
             <div className="mt-6 sm:mt-8 text-center">
-              <button className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2.5 px-6 sm:py-3 sm:px-8 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-500">
-                Tanlang va bog‘laning
+              <button onClick={()=> setOpenModal(true)} className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2.5 px-6 sm:py-3 sm:px-8 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-500">
+                {t('selectAndConnect')}
               </button>
             </div>
           </div>

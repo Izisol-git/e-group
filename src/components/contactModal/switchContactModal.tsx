@@ -3,11 +3,11 @@ import React from 'react';
 interface ContactModalProps {
     isOpen: boolean;
     onClose: () => void;
+    timeValue : string;
 }
 
-const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
+const SwitchContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose , timeValue }) => {
     if (!isOpen) return null;
-
     return (
         <div className="fixed h-full !m-0 inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white rounded-lg p-6 w-full max-w-md">
@@ -18,11 +18,15 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                         className="text-gray-600 hover:text-red-600 focus:outline-none"
                     >
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                  d="M6 18L18 6M6 6l12 12"/>
                         </svg>
                     </button>
                 </div>
+
+
                 <form className="space-y-4">
+                    <p>Aloqa {timeValue} daqiqa davom etadi</p>
                     <div>
                         <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
                             Phone Number
@@ -56,9 +60,11 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                         </button>
                     </div>
                 </form>
+
+
             </div>
         </div>
     );
 };
 
-export default ContactModal;
+export default SwitchContactModal;

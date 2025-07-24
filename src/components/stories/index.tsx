@@ -1,5 +1,6 @@
 import React from "react";
 import { Star } from "lucide-react";
+import {useTranslation} from "react-i18next";
 
 interface Testimonial {
     id: string;
@@ -10,37 +11,12 @@ interface Testimonial {
     avatar: string;
 }
 
-const testimonials: Testimonial[] = [
-    {
-        id: "1",
-        name: "Yogesh Arora",
-        company: "Smartyields Agro MChJ | Ro'yxatdan o'tkazish",
-        rating: 5,
-        testimonial:
-            "Huquqshinomizning yordami bilan barcha jarayonlar juda oson va tez amalga oshdi. Professional va ishonchli xizmat.",
-        avatar: "/placeholder.svg?height=80&width=80",
-    },
-    {
-        id: "2",
-        name: "Yogesh Arora",
-        company: "Smartyields Agro MChJ | Ro'yxatdan o'tkazish",
-        rating: 5,
-        testimonial:
-            "Mening huquqiy muammolarimni aniq va samarali hal qilishdi. Doimo qo'llab-quvvatlash uchun rahmat!",
-        avatar: "/placeholder.svg?height=80&width=80",
-    },
-    {
-        id: "3",
-        name: "Yogesh Arora",
-        company: "Smartyields Agro MChJ | Ro'yxatdan o'tkazish",
-        rating: 5,
-        testimonial:
-            "Yuridik xizmatlar sohasida haqiqiy ekspertlar. Ishlari aniq, halollik va tezlik bilan tanilgan.",
-        avatar: "/placeholder.svg?height=80&width=80",
-    },
-];
+
+
 
 const StarRating: React.FC<{ rating: number }> = ({ rating }) => {
+
+
     return (
         <div className="flex items-center space-x-1">
             {[...Array(5)].map((_, index) => (
@@ -80,6 +56,35 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial }> = ({ testimonial }
 };
 
 const SuccessStories = () => {
+    const {t} = useTranslation();
+    const testimonials: Testimonial[] = [
+        {
+            id: "1",
+            name: t('lawyerName'),
+            company: t('companyRegistration'),
+            rating: 5,
+            testimonial:t('clientStory1'),
+            avatar: "/placeholder.svg",
+        },
+        {
+            id: "2",
+            name: t('lawyerName'),
+            company: t('companyRegistration'),
+            rating: 5,
+            testimonial:t('clientStory2'),
+            avatar: "/placeholder.svg",
+        },
+        {
+            id: "3",
+            name: t('lawyerName'),
+            company: t('companyRegistration'),
+            rating: 5,
+            testimonial:t('clientStory3'),
+            avatar: "/placeholder.svg",
+        },
+    ];
+
+
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
             <div className="text-center mb-8 sm:mb-12">

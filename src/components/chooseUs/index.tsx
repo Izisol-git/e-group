@@ -2,6 +2,7 @@ import { BarChart3, Clock, Scale, Shield, Smile } from "lucide-react";
 import React from "react";
 import YuristWoman from "../../assets/YURIST-OPA.png";
 import Background from "../../assets/bg-yurist-img.png"
+import {useTranslation} from "react-i18next";
 interface Feature {
     id: string;
     title: string;
@@ -10,50 +11,7 @@ interface Feature {
     position: string;
 }
 
-const features: Feature[] = [
-    {
-        id: "economic",
-        title: "Iqtisodiy foyda",
-        description: "Sizga eng maqbul va tejamkor yuridik yechimlar taklif qilamiz.",
-        icon: <BarChart3 className="w-6 h-6 text-white" />,
-        position: "top-left",
-    },
-    {
-        id: "time",
-        title: "Vaqt tejash",
-        description: "Masalalaringizni tez va samarali hal qilish uchun xizmatimiz 24/7 ishlaydi.",
-        icon: <Clock className="w-6 h-6 text-white" />,
-        position: "top-right",
-    },
-    {
-        id: "professional",
-        title: "Professional yondashuv",
-        description: "Tajriba va bilimga asoslangan aniq va ishonchli maslahatlar.",
-        icon: <Scale className="w-6 h-6 text-white" />,
-        position: "middle-left",
-    },
-    {
-        id: "24-7",
-        title: "Doimiy qo'llab-quvvatlash",
-        description: "Har qanday vaqtda murojaat qilishingiz mumkin, biz doimo yordamga tayyormiz.",
-        icon: <Clock className="w-6 h-6 text-white" />,
-        position: "middle-right",
-    },
-    {
-        id: "security",
-        title: "Maxfiylik va xavfsizlik",
-        description: "Sizning ma’lumotlaringiz sir saqlanadi va to‘liq himoyalangan.",
-        icon: <Shield className="w-6 h-6 text-white" />,
-        position: "bottom-left",
-    },
-    {
-        id: "satisfaction",
-        title: "Mijozlar qoniqishi",
-        description: "Biz bilan ishlagan mijozlarimizning yuqori baholari va ijobiy fikrlari.",
-        icon: <Smile className="w-6 h-6 text-white" />,
-        position: "bottom-right",
-    },
-];
+
 
 const FeatureItem: React.FC<{ feature: Feature; className?: string }> = ({ feature, className = "" }) => {
     return (
@@ -70,6 +28,54 @@ const FeatureItem: React.FC<{ feature: Feature; className?: string }> = ({ featu
 };
 
 const WhyChooseUs = () => {
+
+    const {t} = useTranslation();
+    const features: Feature[] = [
+        {
+            id: "economic",
+            title: t('economicBenefit'),
+            description: t('economicBenefitDesc'),
+            icon: <BarChart3 className="w-6 h-6 text-white" />,
+            position: "top-left",
+        },
+        {
+            id: "time",
+            title: t('timeSaving'),
+            description: t('timeSavingDesc'),
+            icon: <Clock className="w-6 h-6 text-white" />,
+            position: "top-right",
+        },
+        {
+            id: "professional",
+            title: t('professionalApproach'),
+            description: t('professionalApproachDesc'),
+            icon: <Scale className="w-6 h-6 text-white" />,
+            position: "middle-left",
+        },
+        {
+            id: "24-7",
+            title: t('constantSupport'),
+            description: t('constantSupportDesc'),
+            icon: <Clock className="w-6 h-6 text-white" />,
+            position: "middle-right",
+        },
+        {
+            id: "security",
+            title: t('privacySecurity'),
+            description: t('privacySecurityDesc'),
+            icon: <Shield className="w-6 h-6 text-white" />,
+            position: "bottom-left",
+        },
+        {
+            id: "satisfaction",
+            title: t('clientSatisfaction'),
+            description: t('clientSatisfactionDesc'),
+            icon: <Smile className="w-6 h-6 text-white" />,
+            position: "bottom-right",
+        },
+    ];
+
+
     return (
         <div
             className="relative bg-gray-50 py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8"
@@ -86,7 +92,7 @@ const WhyChooseUs = () => {
             <div className="relative max-w-7xl mx-auto">
                 <div className="text-center mb-8 sm:mb-12">
                     <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-800">
-                        Nega aynan bizni tanlash kerak?
+                        {t('whyChooseUs')}
                     </h1>
                     <div className="w-16 sm:w-20 h-0.5 bg-red-500 mx-auto mt-3 sm:mt-4"></div>
                 </div>

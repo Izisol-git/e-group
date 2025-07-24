@@ -1,34 +1,42 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import ContactModal from "../contactModal";
 import LanguageSwitcher from "../languageSwitcher";
+import {useNavigate} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 interface NavItem {
     label: string;
-    href?: string;
+    id?: string;
     onClick?: () => void;
 }
+
+
 
 const Navbar: React.FC = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
+    const navigate = useNavigate();
+    const { t } = useTranslation();
 
     const navItems: NavItem[] = [
-        { label: "Home", href: "home" },
-        { label: "About", href: "about" },
-        { label: "Consultation", href: "consultation" },
-        { label: "Services", href: "services" },
-        { label: "Testimonials", href: "testimonials" },
+        { label: t("home"), id: "home" },
+        { label: t("about"), id: "about" },
+        { label: t("consultation"), id: "consultation" },
+        { label: t("services"), id: "services" },
+        { label: t("testimonials"), id: "testimonials" },
         {
-            label: "Contact",
-            onClick: () => setModalOpen(true),
+            label: t("contact"),
+            id: "services-block-footer",
+            onClick: () => setModalOpen(true)
         },
     ];
 
     return (
         <header className="fixed top-0 left-0 w-full bg-white shadow-md border-b z-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between items-center h-16">
-                    <div className="flex items-center space-x-3">
+                <div className="flex justify-between  items-center h-16">
+                    {/*  logo  */}
+                    <div onClick={()=> navigate('/')} className="flex items-center space-x-3 cursor-pointer">
                         <div className="w-10 h-10 bg-red-600 flex items-center justify-center rounded">
                             <span className="text-white font-bold">E</span>
                         </div>
@@ -38,33 +46,32 @@ const Navbar: React.FC = () => {
                         </div>
                     </div>
 
-                    <nav className="hidden md:flex items-center space-x-6">
+                    {/*  navbar items  */}
+                    <nav className="hidden lg:flex items-center space-x-6">
                         {navItems.map((item) =>
-                            item.onClick ? (
+                            (
                                 <button
                                     key={item.label}
-                                    onClick={item.onClick}
+                                    onClick={()=> {
+                                        navigate('/', { state: { scrollToId: item.id } });
+                                        const el = document.getElementById(`${item.id}`);
+                                        if (el) {
+                                            el.scrollIntoView({ behavior: 'smooth' });
+                                        }
+                                    }}
                                     className="text-gray-700 hover:text-red-600 font-medium transition"
                                     type="button"
                                 >
-                                    {item.label}
+                                    {t(item.label)}
                                 </button>
-                            ) : (
-                                <a
-                                    key={item.label}
-                                    href={`#${item.href}`}
-                                    className="text-gray-700 hover:text-red-600 font-medium transition"
-                                    onClick={() => setMobileMenuOpen(false)}
-                                >
-                                    {item.label}
-                                </a>
                             )
                         )}
-                        <LanguageSwitcher />
+                        <LanguageSwitcher/>
                     </nav>
 
-                    <div className="md:hidden flex items-center space-x-2">
-                        <LanguageSwitcher />
+                    {/*  navbar items mobile*/}
+                    <div className="lg:hidden flex items-center space-x-2">
+                        <LanguageSwitcher/>
                         <button
                             className="text-gray-700 hover:text-red-600 focus:outline-none"
                             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
@@ -99,35 +106,30 @@ const Navbar: React.FC = () => {
                 </div>
 
                 {mobileMenuOpen && (
-                    <div className="md:hidden border-t border-gray-200 py-3">
+                    <div className=" block lg:hidden border-t border-gray-200 py-3 m">
                         {navItems.map((item) =>
-                            item.onClick ? (
                                 <button
                                     key={item.label}
-                                    onClick={item.onClick}
-                                    className={`block px-4 py-2 text-gray-700 hover:text-red-600 font-medium w-full text-left ${item.label === "Contact" ? "bg-red-700 text-white" : ""
-                                        }`}
+                                    onClick={() => {
+
+                                        navigate('/', {state: {scrollToId: item.id}});
+                                        setMobileMenuOpen(!mobileMenuOpen)
+                                        const el = document.getElementById(`${item.id}`);
+                                        if (el) {
+                                            el.scrollIntoView({behavior: 'smooth'});
+                                        }
+                                    }}
+                                    className="text-gray-700 hover:!text-red-600 font-medium transition block mt-3 "
                                     type="button"
                                 >
-                                    {item.label}
+                                    {t(item.label)}
                                 </button>
-                            ) : (
-                                <a
-                                    key={item.label}
-                                    href={`#${item.href}`}
-                                    className={`block px-4 py-2 text-gray-700 hover:text-red-600 font-medium w-full text-left ${item.label === "Contact" ? "bg-red-700 text-white" : ""
-                                        }`}
-                                    onClick={() => setMobileMenuOpen(false)}
-                                >
-                                    {item.label}
-                                </a>
-                            )
                         )}
                     </div>
                 )}
             </div>
 
-            <ContactModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+            <ContactModal isOpen={modalOpen} onClose={() => setModalOpen(false)}/>
         </header>
     );
 };

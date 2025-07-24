@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const LanguageSwitcher: React.FC = () => {
-    const [language, setLanguage] = useState<"uz" | "ru">("uz");
+    const { i18n } = useTranslation();
     const [isOpen, setIsOpen] = useState(false);
 
+    const currentLang = i18n.language as "uz" | "ru";
+
     const handleSelect = (lang: "uz" | "ru") => {
-        setLanguage(lang);
+        i18n.changeLanguage(lang);
         setIsOpen(false);
     };
 
@@ -16,11 +19,10 @@ const LanguageSwitcher: React.FC = () => {
                 onClick={() => setIsOpen(!isOpen)}
                 className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded hover:bg-gray-50 transition"
             >
-                {language.toUpperCase()}
+                {currentLang.toUpperCase()}
                 <ChevronDown className="ml-1 h-4 w-4" />
             </button>
 
-            {/* Dropdown */}
             {isOpen && (
                 <div className="absolute right-0 mt-2 w-24 origin-top-right bg-white border border-gray-200 rounded shadow-lg z-50 animate-fade-in">
                     <ul className="py-1">
