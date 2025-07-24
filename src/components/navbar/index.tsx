@@ -109,21 +109,26 @@ const Navbar: React.FC = () => {
                 {mobileMenuOpen && (
                     <div className=" block lg:hidden border-t border-gray-200 py-3 m">
                         {navItems.map((item) =>
-                                <button
-                                    key={item.label}
-                                    onClick={() => {
-                                        navigate('/', {state: {scrollToId: item.id}});
-                                        setMobileMenuOpen(!mobileMenuOpen)
-                                        const el = document.getElementById(`${item.id}`);
-                                        if (el) {
-                                            el.scrollIntoView({behavior: 'smooth'});
-                                        }
-                                    }}
-                                    className="text-gray-700 hover:!text-red-600 font-medium transition block mt-3 "
-                                    type="button"
-                                >
-                                    {t(item.label)}
-                                </button>
+                            <button
+                                key={item.label}
+                                onClick={() => {
+                                    navigate('/', {state: {scrollToId: item.id}});
+                                    setMobileMenuOpen(!mobileMenuOpen)
+                                    const el = document.getElementById(`${item.id}`);
+                                    if (el) {
+                                        const yOffset = -80; // Navbar balandligi
+                                        const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                                        window.scrollTo({top: y, behavior: 'smooth'});
+
+                                        // optional: state tozalash
+                                        window.history.replaceState({}, document.title);
+                                    }
+                                }}
+                                className="text-gray-700 hover:!text-red-600 font-medium transition block mt-3 "
+                                type="button"
+                            >
+                                <a href={`#${item.id}`}>{t(item.label)}</a>
+                            </button>
                         )}
                     </div>
                 )}

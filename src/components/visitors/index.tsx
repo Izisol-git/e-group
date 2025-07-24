@@ -77,7 +77,7 @@ const Visitors: React.FC = () => {
   };
 
   return (
-    <section className="relative bg-white py-12 sm:py-16 lg:py-20 overflow-hidden">
+    <section className="relative bg-white py-12 sm:py-16 lg:py-20 overflow-hidden ">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
           {/* Left section: Text and Navigation */}

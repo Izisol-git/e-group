@@ -17,11 +17,11 @@ const Home: React.FC = () => {
         <div className="font-sans">
 
             <main>
-                <section id="home"><Hero /></section>
-                <section id="about"><Visitors /></section>
-                <section id="consultation"><Consultation /></section>
-                <section id="services"><Services /></section>
-                <section id="testimonials"><SuccessStories /></section>
+                <section id="home" className={'scroll-mt-[50px] ld:scroll-mt-[0]'}><Hero /></section>
+                <section id="about" className={'scroll-mt-[50px] ld:scroll-mt-[0]'}><Visitors /></section>
+                <section id="consultation" className={'scroll-mt-[50px] ld:scroll-mt-[0]'}><Consultation /></section>
+                <section id="services" className={'scroll-mt-[50px] ld:scroll-mt-[0]'}><Services /></section>
+                <section id="testimonials" className={'scroll-mt-[50px] ld:scroll-mt-[0]'}><SuccessStories /></section>
                 <div><WhyChooseUs /></div>
             </main>
             <footer>

@@ -64,16 +64,16 @@ const Footer: React.FC = () => {
                       />
                   </div>
 
-                  <div className="flex items-start gap-2">
-                      <input
-                          type="checkbox"
-                          name="agree"
-                          className="mt-1 cursor-pointer"
-                      />
-                      <label className="text-sm">
-                          {t('privacyConsent')}
-                      </label>
-                  </div>
+                  {/*<div className="flex items-start gap-2">*/}
+                  {/*    <input*/}
+                  {/*        type="checkbox"*/}
+                  {/*        name="agree"*/}
+                  {/*        className="mt-1 cursor-pointer"*/}
+                  {/*    />*/}
+                  {/*    <label className="text-sm">*/}
+                  {/*        {t('privacyConsent')}*/}
+                  {/*    </label>*/}
+                  {/*</div>*/}
 
                   <button
                       type="submit"
